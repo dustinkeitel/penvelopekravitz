@@ -5,8 +5,10 @@ class Celebrity(models.Model):
         return self.name
         
     name = models.CharField(max_length=300)
-    add_date = models.DateTimeField('date added')
-    contributor = models.ForeignKey('auth.User')
+    flagged = models.BooleanField()
+    whitelisted = models.BooleanField()
+    #add_date = models.DateTimeField('date added')
+    #contributor = models.ForeignKey('auth.User')
 
     class Meta:
         verbose_name_plural = 'celebrities'

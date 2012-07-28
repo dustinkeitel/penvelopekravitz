@@ -129,6 +129,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'celebrity',
+    'south',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = ("django.contrib.auth.context_processors.auth",
@@ -168,3 +169,6 @@ LOGGING = {
         },
     }
 }
+
+CELEBS_TO_SEND = 20 # The celebrities sent on each page load, and hence the max score per round
+ROUND_TIME = 15 # Seconds per round

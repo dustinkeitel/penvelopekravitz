@@ -1,56 +1,101 @@
 {% extends "base.html" %}
 {% block content %}
+	{% load staticfiles %}
+		<audio>
+        	<source src="{% static "ding.aiff" %}"></source>
+		</audio>
+		
 				<div class="hero-unit">
-{% if celebs %}
-                    <script>
-                    $(document).ready(function(){
-                        $('ul li:gt(0)').hide();
+                   <script>
+                   $(document).ready(function(){
+                       $('ul li:gt(0)').hide();
+					$('#play_again').hide();
+					$('.buttons').hide();
+					$('#report_celeb_text').hide();
 
-                        $('.btn').click(function() {
-                            if ($('ul li:visible:last').is(':last-child')) {
-                                return false;
-                            }
-
-                            var currentIndex = $('ul').children('li:visible:last').index(),
-                                nextIndex = currentIndex + 1;
-                            $('ul li').hide();
-                            $('ul li:gt(' + currentIndex + ')').show();
-                            $('ul li:gt(' + nextIndex + ')').hide();
-                        });
-						var score = 0;
-						$('.btn-success').click(function() {
+					var score = 0;
+					var max_score = {{max_celebs}};
+					var audio = $("audio")[0];
+					
+					$('#win, #start').click(function() {
+						$('.buttons').hide();
+						setTimeout(function(){
+							$('.buttons').fadeIn();
+						}, 1000);
+					});
+					
+					$('#win').click(function() {
+						if (score < max_score) {
 							score++;
-						});
-						$(function() {
-   							var seconds = 15;
-							setTimeout(updateCountdown, 1000);
-							function updateCountdown() {
-								seconds--;
-							    if (seconds > 0) {
-							    	$("#countdown").text("You have " + seconds + " seconds remaining");
-							    	setTimeout(updateCountdown, 1000);
-							    } else {
-							    	$("#countdown").text("Done! Your score is " + score );
-							    }
-							}
-						});
-                    });
-                    </script>
-						<span id="countdown"></span>
-                        <ul class="unstyled">
-                            {% for celeb in celebs %}
-                            <li class="celeb">
-                                <h2>
-                                    {{celeb}}
-                                </h2>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                        <a class="btn btn-success">Got it</a>
+							audio.play();
+						}
+						else {
+							alert("You've maxed out your points for this round!")
+						}
+						if ($('ul li:visible:last').is(':last-child')) {
+                               return false;
+                           }
+
+                           var currentIndex = $('ul').children('li:visible:last').index(),
+                               nextIndex = currentIndex + 1;
+                           $('ul li').hide();
+                           $('ul li:gt(' + currentIndex + ')').show();
+                           $('ul li:gt(' + nextIndex + ')').hide();
+
+						$('.btn-danger').show();
+						$('#report_celeb_text').hide();
+						
+					});
+					
+					$('.btn-danger').click(function(){
+						$('.btn-danger').hide();
+						$('#report_celeb_text').show();
+					});
+					
+					$('#start').click(function() {
+						$('#start').hide();
+  						var seconds = {{max_time}};
+						setTimeout(updateCountdown, 1000);
+						function updateCountdown() {
+							seconds--;
+						    if (seconds > 0) {
+						    	$("#countdown").text("You have " + seconds + " seconds remaining");
+						    	setTimeout(updateCountdown, 1000);
+						    } else {
+						    	$("#countdown").text("Done! Your score is " + score );
+								$('.buttons').hide();
+								$('ul.unstyled').hide();
+								$('#report_celeb_text').hide();
+								$("#countdown").addClass('lead');
+								$('#play_again').show();
+						    }
+						}
+					});
+                   });
+                   </script>
+					<div id="countdown"></div>
+                       <ul class="unstyled">
+                           {% for celeb in celebs %}
+                           <li class="celeb">
+                               <h2>
+                                   {{celeb}}
+                               </h2>
+                           </li>
+						   {% empty %}
+								<h1>No celebrities. What will people talk about?</h1>
+								<script>
+									$(document).ready(function(){
+										$('#start').hide();
+									});
+								</script>
+                           {% endfor %}
+                       </ul>
+					<a id="start" class="btn btn-success">Start</a>
+					<div class="buttons">
+                       	<a id="win" class="btn btn-success">Got it</a>
                         <a class="btn btn-danger">Not a celebrity</a>
-                    {% else %}
-                        <h1>No celebrities. What will people talk about?</h1>
-                        
-                    {% endif %}
+					</div>
+					<div id="report_celeb_text">We'll check on that. Until then, sound it out.</div>
+					<a id="play_again" class="btn btn-success" href="{% url play %}">Play again!</a>
 				</div>
 {% endblock %}
