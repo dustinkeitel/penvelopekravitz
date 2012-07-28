@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}The Celebrity Game!{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% load staticfiles %}
+
+        <link href="{% static "css/bootstrap.css" %}" type="text/css" rel="stylesheet">
+        <link href="{% static "css/styles.css" %}" type="text/css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    </head>
+    <body>
+        {% block header %}
+        {% endblock %}
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+        <footer class="modal-footer">
+			<a class="pull-left" href="/">Home</a>
+            Made by Dustin
+        </footer>
+    </body>
+</html>
