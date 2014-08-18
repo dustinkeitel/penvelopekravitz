@@ -7,13 +7,15 @@ TEMPLATE_DEBUG = DEBUG
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
+PROJECT_DIR = os.path.abspath(os.curdir)
+DB_PATH = os.path.join(PROJECT_DIR, 'db')
 
 MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/Volumes/Secure Home Folder Stuff/Documents/Programming/penvelopekravitz/db',                      # Or path to database file if using sqlite3.
+        'NAME' : DB_PATH,                # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -67,7 +69,7 @@ STATIC_ROOT = ''
 STATIC_URL = '/static/'
 
 # Additional locations of static files
-statpath = os.path.join(os.path.abspath(os.curdir), 'penvelopekravitz','static')
+statpath = os.path.join(PROJECT_DIR, 'penvelopekravitz','static')
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
@@ -108,7 +110,6 @@ ROOT_URLCONF = 'penvelopekravitz.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'penvelopekravitz.wsgi.application'
 
-PROJECT_DIR = os.path.abspath(os.curdir)
 
 TEMPLATE_DIRS = (
     os.path.join(PROJECT_DIR, 'penvelopekravitz', 'templates')
