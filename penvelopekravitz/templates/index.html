@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
                     <div class="hero-unit">
-                        <h1>The Celebrity Game</h1>
+                        <div class="title">
+                            <h1>The Celebrity Game</h1>
+                        </div>
                         <div class="buttons">
-                            <a class="btn span4" href="{% url play %}">Play</a>
-                            <a class="btn span4" href="{% url add_celeb %}">Add Celebrities</a>
+                            <a class="btn span4" href="{% url 'play' %}">Play</a>
+                            <a class="btn span4" href="{% url 'add_celeb' %}">Add Celebrities</a>
                         </div>
                     </div>
 {% endblock %}
