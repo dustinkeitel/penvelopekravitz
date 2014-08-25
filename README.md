@@ -1,7 +1,7 @@
 penvelopekravitz
 ================
 
-Ever play the game 'celebrities'? Dango + Bootstrap + jQuery
+Ever play the game 'celebrities'? Django + Bootstrap + jQuery
 
 1. python manage.py syncdb
 2. python manage.py migrate
