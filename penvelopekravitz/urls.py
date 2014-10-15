@@ -10,9 +10,16 @@ admin.autodiscover()
 class CelebSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Celebrity
-        fields = ('name',)
+        fields = ('name', 'id')
 
 class CelebViewSet(viewsets.ModelViewSet):
+    """
+    Create with:
+        curl -H "Content-Type: application/json" -X POST http://localhost:8000/api/celebs/ -d '{"name":"Foo Bar"}' -u user:password
+
+    Delete with:
+        curl -X DELETE http://127.0.0.1:8000/api/celebs/551/ -u user:password
+    """
     queryset = Celebrity.objects.all()
     serializer_class = CelebSerializer
 
