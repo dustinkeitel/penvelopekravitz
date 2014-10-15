@@ -3,6 +3,7 @@ South==0.7.5
 distribute==0.6.19
 django-object-tools==0.0.4
 django-south-admin==0.0.3
+djangorestframework==2.4.3
 pysqlite==2.6.3
 virtualenv==1.6.4
 virtualenvwrapper==2.10
